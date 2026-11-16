@@ -17,9 +17,17 @@ QuickJS-ng für Dart: seine C-Quellen für die Build-Hooks nativer Pakete und
 ein Dart-Binding mit typisierten Werten, einem Hintergrund-Isolate und einer
 Sandbox.
 
-Es enthält QuickJS-ng 0.17.0 und läuft auf iOS, Android, macOS, Linux und
+Es enthält QuickJS-ng 0.18.0 und läuft auf iOS, Android, macOS, Linux und
 Windows, nicht im Web. Ein Build-Hook übersetzt es aus den Quellen auf dem
 Rechner, der die App baut: kein Download, keine vorgefertigte Binärdatei.
+
+> **Fork:** Dieses Repository ist ein Fork von
+> [ggsuite/gg_quickjs](https://github.com/ggsuite/gg_quickjs) für die
+> Laras-Musik-App (adiprmx/laras). Es existiert nur, um ein neueres
+> QuickJS-ng zu tragen als das veröffentlichte Paket: Upstream 0.1.0
+> enthält 0.17.0, dieser Fork enthält 0.18.0. Sobald Upstream eine Version
+> mit QuickJS-ng 0.18.0 oder neuer veröffentlicht, sollte Laras zurück zum
+> pub.dev-Paket wechseln.
 
 ## Motivation
 
@@ -243,7 +251,7 @@ aus.
   Code. QuickJS-ng ist ein in C geschriebener Interpreter; ein Fehler darin
   kann den Speicher der App beschädigen. Führen Sie Code, dem Sie nicht
   vertrauen, in einem eigenen Prozess aus.
-- QuickJS-ng 0.17.0 erholt sich nicht immer, wenn ihm beim Übersetzen der
+- QuickJS-ng 0.18.0 erholt sich nicht immer, wenn ihm beim Übersetzen der
   Speicher ausgeht: Der Code, den Dart übergibt, wird ohne Speichergrenze
   übersetzt, aber `eval` oder `new Function` in einem Skript, das seinen
   Speicher aufgebraucht hat, kann den Prozess abstürzen lassen.
@@ -297,7 +305,7 @@ Vokabular der QuickJS-Pakete auf pub.dev.
   [Code-Leitfaden](doc/guides/code-guide.md) und dem
   [Test-Leitfaden](doc/guides/test-guide.md).
 - Aktualisieren Sie QuickJS-ng mit `node tool/update-quickjs-ng.js <tag>`,
-  z. B. `v0.17.0`; das Skript kopiert die Teilmenge und setzt die
+  z. B. `v0.18.0`; das Skript kopiert die Teilmenge und setzt die
   Versionskonstante.
 
 ## Lizenz

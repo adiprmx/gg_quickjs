@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.1.1 - 2026-11-16
+
+### Changed
+
+- Fork of ggsuite/gg_quickjs 0.1.0, maintained for the Laras music app
+  (adiprmx/laras): QuickJS-ng 0.17.0 -> 0.18.0 via
+  `node tool/update-quickjs-ng.js v0.18.0` (fixes two use-after-free
+  bugs, quickjs-ng#1781 and #1844, and makes OOM errors uncatchable by
+  JS code). When upstream publishes a release with QuickJS-ng 0.18.0 or
+  newer, Laras should switch back to the pub.dev package.
+
 ## 0.1.0 - 2026-10-19
 
 ### Added

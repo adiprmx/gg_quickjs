@@ -16,9 +16,20 @@ English | [Deutsch](README.de.md)
 QuickJS-ng for Dart - its C sources for the build hooks of native packages and
 a Dart binding with typed values, a background isolate and a sandbox.
 
-It carries QuickJS-ng 0.17.0 and runs on iOS, Android, macOS, Linux and
+It carries QuickJS-ng 0.18.0 and runs on iOS, Android, macOS, Linux and
 Windows, not on the web. A build hook compiles it from source on the machine
 that builds the app: no download, no prebuilt binary.
+
+> **Fork:** this repository is a fork of
+> [ggsuite/gg_quickjs](https://github.com/ggsuite/gg_quickjs), maintained
+> for the Laras music app (adiprmx/laras). It exists only to carry a newer
+> QuickJS-ng than the published package: upstream 0.1.0 ships 0.17.0, this
+> fork ships 0.18.0 (two use-after-free fixes, #1781/#1844, plus
+> uncatchable OOM errors). When upstream publishes a release with
+> QuickJS-ng 0.18.0 or newer, Laras should switch back to the pub.dev
+> package. Update path: `node tool/update-quickjs-ng.js <tag>`, then
+> update the version in README.md, README.de.md and NOTICE, bump the
+> version in pubspec.yaml, and run the tests.
 
 ## Motivation
 
@@ -236,10 +247,12 @@ and `native_toolchain_c`; ship the `NOTICE` of QuickJS-ng with the app.
 - The sandbox is a capability policy, not a defense against hostile code.
   QuickJS-ng is an interpreter written in C; a bug in it can corrupt the
   memory of the app. Run code you do not trust in a separate process.
-- QuickJS-ng 0.17.0 does not always recover from running out of memory while
+- QuickJS-ng 0.18.0 does not always recover from running out of memory while
   it compiles: the code that Dart passes compiles without the memory limit,
   but `eval` or `new Function` in a script that has used up its memory may
-  crash the process.
+  crash the process. (0.18.0 hardened the OOM boundary — OOM exceptions and
+  internal errors are now uncatchable by JS code — but recovery from OOM
+  during compilation is still not guaranteed.)
 - `maxStackSize` counts from the call into JavaScript; the default of 256
   KiB allows about 250 nested calls. The native stack of a Dart isolate holds
   about 1 MiB on 64-bit platforms, so a limit beyond 512 KiB may crash
@@ -284,7 +297,7 @@ vocabulary of the QuickJS packages on pub.dev.
   [code guide](doc/guides/code-guide.md) and the
   [test guide](doc/guides/test-guide.md).
 - Update QuickJS-ng with `node tool/update-quickjs-ng.js <tag>`, e.g.
-  `v0.17.0`; the script copies the subset and sets the version constant.
+  `v0.18.0`; the script copies the subset and sets the version constant.
 
 ## License
 

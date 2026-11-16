@@ -3,7 +3,7 @@ Copyright (c) 2026 ggsuite, MIT License (see LICENSE)
 
 This package includes third-party software:
 
-QuickJS-ng 0.17.0
+QuickJS-ng 0.18.0
 https://github.com/quickjs-ng/quickjs
 The library subset in src/quickjs-ng, unchanged, under the MIT License
 (src/quickjs-ng/LICENSE). Native libraries built from this package, by its

@@ -6,4 +6,4 @@
 
 /// The version of QuickJS-ng that `gg_quickjs` carries in `src/quickjs-ng`;
 /// `tool/update-quickjs-ng.js` keeps it in sync with `quickjs.h`.
-const String quickjsNgVersion = '0.17.0';
+const String quickjsNgVersion = '0.18.0';
