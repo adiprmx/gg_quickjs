@@ -414,7 +414,7 @@ static JSValue box_value(uint64_t handle) {
 // Encoding
 
 static int encode_value(GgQjsEncoder* e, JSValueConst value);
-static int interrupt_handler(JSRuntime* rt, void* opaque);
+static int interrupt_handler(JSContext* ctx, void* opaque);
 
 // Throws the uncatchable error of an interrupted script.
 static void throw_interrupted(JSContext* ctx) {
@@ -440,7 +440,7 @@ static bool encoder_continues(GgQjsEncoder* e) {
   bool stop = r->describing
                   ? atomic_load(&r->closing) ||
                         (r->deadline_ns != 0 && now_ns() > r->deadline_ns)
-                  : interrupt_handler(r->rt, r) != 0;
+                  : interrupt_handler(r->ctx, r) != 0;
   if (stop) throw_interrupted(r->ctx);
   return !stop;
 }
@@ -1063,8 +1063,8 @@ static void free_arguments(GgQjsRuntime* r, int argc, JSValue* argv) {
 // ############################################################################
 // Entering and leaving
 
-static int interrupt_handler(JSRuntime* rt, void* opaque) {
-  (void)rt;
+static int interrupt_handler(JSContext* ctx, void* opaque) {
+  (void)ctx;
   GgQjsRuntime* r = (GgQjsRuntime*)opaque;
   if (r->describing) return 0;
   if (atomic_load(&r->closing) || atomic_load(&r->interrupt_requested)) {
